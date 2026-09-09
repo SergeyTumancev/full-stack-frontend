@@ -1,12 +1,14 @@
 import { products } from '@/data/products';
-import ProductRender from '@/lib/ProductRender';
+import ProductCard from '@/components/ProductCard';
 
 export default function Home() {
   return (
-    <div className='product_page'>
+    <ul className='product_page'>
       {products.map((product) => (
-        <ProductRender key={product.id} product={product} />
+        <li key={product.id}>
+          <ProductCard key={product.id} product={product} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
