@@ -1,4 +1,4 @@
-import {getProductById} from '@/lib/helper';
+import { getProductById, formatted } from '@/lib/products';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -10,18 +10,21 @@ export default async function ProductPage({
 }) {
   const { id } = await params;
   const product = getProductById(id);
-    if (!product) {
-    return notFound()
-  }
+  if (!product) notFound();
+  const { name, price, description, emoji } = product;
+  const formattedPrice = formatted(price);
 
   return (
-    <div className='flex size-full justify-around'>
+    <div className='flex size-full justify-around items-center'>
       <Link href="/" className='border'>
         Назад в каталог
       </Link>
-      <div>
-        <h1>Товар: {product.name}</h1>
-        <h2>{product.description}</h2>
+      <div className='product_item'>
+        <h1>Товар: {name}</h1>
+        <p>{description}</p>
+        <p>{product.description}</p>
+        <p>{formattedPrice}</p>
+        <p>{emoji}</p>
       </div>
     </div>
   );
