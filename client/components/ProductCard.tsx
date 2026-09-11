@@ -1,7 +1,8 @@
 import type { Product } from '@/data/products';
+import Link from 'next/link';
 
 export default function ProductCard({
-  product: { name, price, description, emoji }
+  product: { id, name, price, description, emoji }
 }: {
   product: Product;
 }) {
@@ -11,11 +12,13 @@ export default function ProductCard({
 }).format(price);
   
   return (
-    <article className='product_item'>
-      {emoji}
-        <h2>{name}</h2>
-        <p>{formatted}</p>
-      <p className='product_description'>{description}</p>
-    </article>
+    <Link href={`/product/${id}`}>
+      <article className='product_item'>
+        {emoji}
+          <h2>{name}</h2>
+          <p>{formatted}</p>
+        <p className='product_description'>{description}</p>
+      </article>
+    </Link>
   );
 }
