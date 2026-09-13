@@ -11,7 +11,7 @@ export default function ProductCard({
   
   return (
     <Link href={`/product/${id}`}>
-      <article className='product_card_item'>
+      <article className='card'>
         {emoji}
         <h2>{name}</h2>
         <p>{formattedPrice}</p>

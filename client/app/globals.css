@@ -32,18 +32,7 @@ body {
   padding: 30px;
 }
 
-.product_item {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: aliceblue;
-  .product_description {
-    font-size: small;
-  }
-}
-
-.product_card_item {
+.card {
   display: flex;
   flex-direction: column;
   padding: 10px;
