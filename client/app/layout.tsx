@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "IShop",
+  title: { default: 'IShop', template: '%s | IShop' },
   description: "Ваш любимый магазин электроники",
 };
 

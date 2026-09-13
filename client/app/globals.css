@@ -42,3 +42,20 @@ body {
     font-size: small;
   }
 }
+
+.product_card_item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  .product_description {
+    font-size: small;
+  }
+}
+
+.button {
+  background-color: aliceblue;
+  padding: 5px;
+  border-radius: 5px;
+}
