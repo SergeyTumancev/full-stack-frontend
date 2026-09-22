@@ -2,12 +2,7 @@ import { getProductById, formatPrice, getProductIds } from '@/lib/products';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = await getProductById(id);
   const { name, price, description, emoji } = product;
@@ -15,7 +10,7 @@ export default async function ProductPage({
 
   return (
     <div className='flex flex-col gap-4 size-full justify-around items-center'>
-      <Link href="/" className='button'>
+      <Link href='/' className='button'>
         Назад в каталог
       </Link>
       <div className='card'>

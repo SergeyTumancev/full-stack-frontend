@@ -3,12 +3,12 @@ import Link from 'next/link';
 import type { Product } from '@/lib/products';
 
 export default function ProductCard({
-  product: { id, name, price, description, emoji }
+  product: { id, name, price, description, emoji },
 }: {
   product: Product;
 }) {
   const formattedPrice = formatPrice(price);
-  
+
   return (
     <Link href={`/product/${id}`}>
       <article className='card'>

@@ -1,9 +1,9 @@
 import ProductCard from '@/components/ProductCard';
-import { getProducts} from '@/lib/products';
+import { getProducts } from '@/lib/products';
 
 export default async function Home() {
   const products = await getProducts();
-  
+
   return (
     <>
       <h1>Каталог</h1>
