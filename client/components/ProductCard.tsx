@@ -1,6 +1,6 @@
-import type { Product } from '@/data/products';
 import { formatPrice } from '@/lib/products';
 import Link from 'next/link';
+import type { Product } from '@/lib/products';
 
 export default function ProductCard({
   product: { id, name, price, description, emoji }

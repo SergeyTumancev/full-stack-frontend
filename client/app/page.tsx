@@ -1,7 +1,9 @@
-import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
+import { getProducts} from '@/lib/products';
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
+  
   return (
     <>
       <h1>Каталог</h1>

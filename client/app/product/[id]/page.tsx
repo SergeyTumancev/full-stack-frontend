@@ -1,6 +1,5 @@
 import { getProductById, formatPrice, getProductIds } from '@/lib/products';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 
@@ -11,7 +10,6 @@ export default async function ProductPage({
 }) {
   const { id } = await params;
   const product = await getProductById(id);
-  if (!product) notFound();
   const { name, price, description, emoji } = product;
   const formattedPrice = formatPrice(price);
 
@@ -37,10 +35,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const product = await getProductById(id);
-
-  if (!product) {
-    return { title: 'Товар не найден' };
-  }
 
   return {
     title: product.name,
