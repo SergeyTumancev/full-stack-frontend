@@ -8,6 +8,11 @@ const port = Number(process.env.PORT) || 4000;
 app.use(cors());
 app.use(express.json());
 
+app.use((req, _res, next) => {
+  console.log(`${new Date().toISOString()} ${req.method} ${req.path}`);
+  next();
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
