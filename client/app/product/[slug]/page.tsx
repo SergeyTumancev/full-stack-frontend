@@ -1,10 +1,10 @@
-import { getProductById, formatPrice, getProductIds } from '@/lib/products';
+import { getProductBySlug, formatPrice, getProductSlugs } from '@/lib/products';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const product = await getProductById(id);
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
   const { name, price, description, emoji } = product;
   const formattedPrice = formatPrice(price);
 
@@ -26,10 +26,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
-  const product = await getProductById(id);
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
 
   return {
     title: product.name,
@@ -38,6 +38,6 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const result = await getProductIds();
+  const result = await getProductSlugs();
   return result;
 }

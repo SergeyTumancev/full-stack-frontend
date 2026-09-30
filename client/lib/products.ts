@@ -3,6 +3,7 @@ const API_URL = process.env.API_URL ?? 'http://localhost:4000';
 
 export type Product = {
   id: string;
+  slug: string;
   name: string;
   price: number;
   description: string;
@@ -17,8 +18,8 @@ type ProductResponse = {
   data: Product;
 };
 
-export async function getProductById(id: string) {
-  const res = await fetch(`${API_URL}/api/products/${id}`);
+export async function getProductBySlug(slug: string) {
+  const res = await fetch(`${API_URL}/api/products/${slug}`);
   if (res.status === 404) notFound();
   if (!res.ok) throw new Error(`API responded with ${res.status}`);
   const { data } = (await res.json()) as ProductResponse;
@@ -32,9 +33,9 @@ export function formatPrice(price: number) {
   }).format(price);
 }
 
-export async function getProductIds(): Promise<{ id: string }[]> {
+export async function getProductSlugs(): Promise<{ slug: string }[]> {
   const products = await getProducts();
-  return products.map((product) => ({ id: product.id }));
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function getProducts(): Promise<Product[]> {
