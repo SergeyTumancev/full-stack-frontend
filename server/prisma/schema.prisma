@@ -21,6 +21,8 @@ model Product {
   emoji       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("products")
 }
 
 model User {
@@ -30,4 +32,6 @@ model User {
   name         String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@map("users")
 }
