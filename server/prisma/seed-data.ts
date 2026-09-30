@@ -1,5 +1,4 @@
-export type Product = {
-  id: string;
+export type SeedProduct = {
   slug: string;
   name: string;
   price: number;
@@ -7,9 +6,8 @@ export type Product = {
   emoji: string;
 };
 
-export const products: Product[] = [
+export const products: SeedProduct[] = [
   {
-    id: 'cm3xk9a2b00000000000000001',
     slug: 'wireless-headphones',
     name: 'Беспроводные наушники',
     price: 4990,
@@ -17,7 +15,6 @@ export const products: Product[] = [
     emoji: '🎧',
   },
   {
-    id: 'cm3xk9a2b00000000000000002',
     slug: 'mechanical-keyboard',
     name: 'Механическая клавиатура',
     price: 6490,
@@ -25,7 +22,6 @@ export const products: Product[] = [
     emoji: '⌨️',
   },
   {
-    id: 'cm3xk9a2b00000000000000003',
     slug: 'smart-watch',
     name: 'Умные часы',
     price: 12990,
@@ -33,7 +29,6 @@ export const products: Product[] = [
     emoji: '⌚',
   },
   {
-    id: 'cm3xk9a2b00000000000000004',
     slug: 'coffee-mug',
     name: 'Керамическая кружка',
     price: 890,
@@ -41,7 +36,6 @@ export const products: Product[] = [
     emoji: '☕',
   },
   {
-    id: 'cm3xk9a2b00000000000000005',
     slug: 'notebook',
     name: 'Блокнот в твёрдой обложке',
     price: 450,
@@ -49,7 +43,6 @@ export const products: Product[] = [
     emoji: '📓',
   },
   {
-    id: 'cm3xk9a2b00000000000000006',
     slug: 'backpack',
     name: 'Городской рюкзак',
     price: 3490,
@@ -57,7 +50,6 @@ export const products: Product[] = [
     emoji: '🎒',
   },
   {
-    id: 'cm3xk9a2b00000000000000007',
     slug: 'desk-lamp',
     name: 'Настольная лампа',
     price: 1990,
@@ -65,7 +57,6 @@ export const products: Product[] = [
     emoji: '💡',
   },
   {
-    id: 'cm3xk9a2b00000000000000008',
     slug: 'plant',
     name: 'Живое растение в горшке',
     price: 1290,
@@ -73,7 +64,3 @@ export const products: Product[] = [
     emoji: '🪴',
   },
 ];
-
-export function getProductBySlug(slug: string) {
-  return products.find((product) => product.slug === slug);
-}

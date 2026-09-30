@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import { getProductBySlug, products } from './data/products';
+import { getProductBySlug, getProducts } from './products.repo';
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;
@@ -17,13 +17,14 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.get('/api/products', (_req, res) => {
+app.get('/api/products', async (_req, res) => {
+  const products = await getProducts();   // ← async + await
   res.json({ data: products });
 });
 
-app.get('/api/products/:slug', (req, res) => {
+app.get('/api/products/:slug', async (req, res) => {
   const { slug } = req.params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     res
