@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 const API_URL = process.env.API_URL ?? 'http://localhost:4000';
+import { cache } from 'react';
 
 export type Product = {
   id: string;
@@ -18,13 +19,13 @@ type ProductResponse = {
   data: Product;
 };
 
-export async function getProductBySlug(slug: string) {
+export const getProductBySlug = cache(async (slug: string) => {
   const res = await fetch(`${API_URL}/api/products/${slug}`);
   if (res.status === 404) notFound();
   if (!res.ok) throw new Error(`API responded with ${res.status}`);
   const { data } = (await res.json()) as ProductResponse;
   return data;
-}
+});
 
 export function formatPrice(price: number) {
   return new Intl.NumberFormat('ru-RU', {
