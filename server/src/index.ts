@@ -19,27 +19,40 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.get('/api/products', asyncHandler(async (_req, res) => {
-  const products = await getProducts();
-  res.json({ data: products });
-}));
+app.get(
+  '/api/products',
+  asyncHandler(async (_req, res) => {
+    const products = await getProducts();
+    res.json({ data: products });
+  }),
+);
 
-app.get('/api/products/:slug', asyncHandler(async (req, res) => {
-  const { slug } = req.params;
-  const product = await getProductBySlug(slug);
+app.get(
+  '/api/products/:slug',
+  asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+    const product = await getProductBySlug(slug);
 
-  if (!product) {
-    res
-      .status(404)
-      .json({ error: { code: 'PRODUCT_NOT_FOUND', message: 'Товар не найден', slug: slug } });
-    return;
-  }
+    if (!product) {
+      res
+        .status(404)
+        .json({ error: { code: 'PRODUCT_NOT_FOUND', message: 'Товар не найден', slug: slug } });
+      return;
+    }
 
-  res.json({ data: product });
-}));
+    res.json({ data: product });
+  }),
+);
 
 const prismaUnavailable = new Set(['P1001', 'P1002', 'P1008', 'P1017']);
-const driverUnavailable = new Set(['ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND', 'EAI_AGAIN', 'EPIPE']);
+const driverUnavailable = new Set([
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'ETIMEDOUT',
+  'ENOTFOUND',
+  'EAI_AGAIN',
+  'EPIPE',
+]);
 
 app.use((error: unknown, _req: Request, res: Response, next: NextFunction) => {
   console.error(`${new Date().toISOString()} ${_req.method} ${_req.path}`, error);
@@ -56,7 +69,10 @@ app.use((error: unknown, _req: Request, res: Response, next: NextFunction) => {
 
   if (dbUnavailable) {
     res.status(503).json({
-      error: { code: 'SERVICE_UNAVAILABLE', message: 'Сервис временно недоступен, попробуйте позже' },
+      error: {
+        code: 'SERVICE_UNAVAILABLE',
+        message: 'Сервис временно недоступен, попробуйте позже',
+      },
     });
     return;
   }

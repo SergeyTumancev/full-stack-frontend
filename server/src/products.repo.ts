@@ -6,7 +6,7 @@ export type ProductDto = {
   id: string;
   slug: string;
   name: string;
-  price: number;      // ← именно number, не Decimal
+  price: number; // ← именно number, не Decimal
   description: string;
   emoji: string;
 };
@@ -16,7 +16,7 @@ function toDto(product: Product): ProductDto {
     id: product.id,
     slug: product.slug,
     name: product.name,
-    price: Number(product.price),   // ← ключевое: Decimal → number
+    price: Number(product.price), // ← ключевое: Decimal → number
     description: product.description,
     emoji: product.emoji,
   };

@@ -4,6 +4,6 @@ export function asyncHandler(
   handler: (req: Request, res: Response, next: NextFunction) => Promise<void>,
 ): RequestHandler {
   return (req, res, next) => {
-    handler(req, res, next).catch(next);   // ← ключевая строка
+    handler(req, res, next).catch(next); // ← ключевая строка
   };
 }
