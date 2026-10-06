@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express, { type NextFunction, type Request, type Response } from 'express';
 import { getProductBySlug, getProducts } from './products.repo';
+import authRouter from './auth/auth.routes';
 import { asyncHandler } from './async-handler';
 import { Prisma } from './generated/prisma/client';
 
@@ -14,6 +15,8 @@ app.use((req, _res, next) => {
   console.log(`${new Date().toISOString()} ${req.method} ${req.path}`);
   next();
 });
+
+app.use('/api/auth', authRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
@@ -59,6 +62,18 @@ app.use((error: unknown, _req: Request, res: Response, next: NextFunction) => {
 
   if (res.headersSent) {
     return next(error);
+  }
+
+  const parseError = error as { type?: string };
+
+  if (error instanceof SyntaxError && parseError.type === 'entity.parse.failed') {
+    res.status(400).json({
+      error: {
+        code: 'INVALID_JSON',
+        message: 'Некорректный JSON в теле запроса',
+      },
+    });
+    return;
   }
 
   const code = (error as { code?: string }).code;
