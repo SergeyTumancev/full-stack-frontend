@@ -4,6 +4,7 @@ import { getProductBySlug, getProducts } from './products.repo';
 import authRouter from './auth/auth.routes';
 import { asyncHandler } from './async-handler';
 import { Prisma } from './generated/prisma/client';
+import loginRouter from './auth/login';
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;
@@ -17,6 +18,7 @@ app.use((req, _res, next) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/auth', loginRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });

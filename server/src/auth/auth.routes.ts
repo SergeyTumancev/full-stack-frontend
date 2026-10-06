@@ -3,29 +3,11 @@ import bcrypt from 'bcryptjs';
 import { asyncHandler } from '../async-handler';
 import { createUser, findUserByEmail } from './auth.repo';
 import { Prisma } from '../generated/prisma/client';
-import type { User } from '../generated/prisma/client';
-import type { Response } from 'express';
+import { sendValidationError, toPublicUser } from './helper';
 
 const authRouter = Router();
 const SALT_ROUNDS = 12;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function sendValidationError(res: Response, message: string) {
-  res.status(400).json({
-    error: {
-      code: 'VALIDATION_ERROR',
-      message,
-    },
-  });
-}
-
-function toPublicUser(user: User) {
-  return {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-  };
-}
 
 authRouter.post(
   '/register',
