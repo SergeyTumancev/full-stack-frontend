@@ -22,3 +22,9 @@ export function createUser(input: CreateUserInput): Promise<User> {
     },
   });
 }
+
+export function findUserById(id: string): Promise<User | null> {
+  return prisma.user.findUnique({
+    where: { id },
+  });
+}

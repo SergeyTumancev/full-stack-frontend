@@ -17,3 +17,12 @@ export function toPublicUser(user: User) {
     name: user.name,
   };
 }
+
+export function sendUnauthorized(res: Response, code: string, message: string) {
+  res.status(401).json({
+    error: {
+      code,
+      message,
+    },
+  });
+}

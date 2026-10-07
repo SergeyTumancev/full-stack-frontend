@@ -5,12 +5,15 @@ import authRouter from './auth/auth.routes';
 import { asyncHandler } from './async-handler';
 import { Prisma } from './generated/prisma/client';
 import loginRouter from './auth/login';
+import cookieParser from 'cookie-parser';
+import meRouter from './auth/me';
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use((req, _res, next) => {
   console.log(`${new Date().toISOString()} ${req.method} ${req.path}`);
@@ -19,6 +22,7 @@ app.use((req, _res, next) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/auth', loginRouter);
+app.use('/api/auth', meRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
