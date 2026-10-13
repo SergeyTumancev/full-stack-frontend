@@ -7,6 +7,7 @@ import { Prisma } from './generated/prisma/client';
 import loginRouter from './auth/login';
 import cookieParser from 'cookie-parser';
 import meRouter from './auth/me';
+import refreshRouter from './auth/refresh';
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;
@@ -23,6 +24,7 @@ app.use((req, _res, next) => {
 app.use('/api/auth', authRouter);
 app.use('/api/auth', loginRouter);
 app.use('/api/auth', meRouter);
+app.use('/api/auth', refreshRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });

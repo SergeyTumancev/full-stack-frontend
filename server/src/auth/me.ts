@@ -28,7 +28,7 @@ meRouter.get(
       }
 
       const userId = decoded.sub;
-      if (!userId) {
+      if (typeof userId !== 'string') {
         sendUnauthorized(res, 'INVALID_TOKEN', 'Требуется авторизация');
         return;
       }
